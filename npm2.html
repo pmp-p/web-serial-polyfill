@@ -1,4 +1,4 @@
-<h6>Version 0.0.2-10</h6>
+<h6>  Version 0.0.2-11  </h6>
 
 <h1> Testing Polyfill NPM </h1>
 <a href="https://hpssjellis.github.io/web-serial-polyfill/index.html">My Polyfill Index page</a><br><br>
@@ -55,11 +55,15 @@ myPolyConnect()
 }">
 <p id='ReceivedText'>...</p>
 
-<p>USB vendor ID: <span id="usbVendorId"/></p>
-<p>USB product ID: <span id="usbProductId"/></p>
+<p>USB Device Vendor ID: <span id="usbVendorId"/></p>
+<p>USB Device Product ID: <span id="usbProductId"/></p>
 
-<button id='getInfo'>Get Serial Info</button>
-
+<input type=button value="GetDevice Info" onclick="{                                                 
+    const results = mySerial.getInfo();
+    console.log('get info results', results);
+    document.getElementById("usbVendorId").textContent = results.usbVendorId;
+    document.getElementById("usbProductId").textContent = results.usbProductId;                                                   
+}">
 
 
 
