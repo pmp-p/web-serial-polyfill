@@ -1,4 +1,4 @@
-<h6>  Version 0.0.3-35  </h6>
+<h6>  Version 0.0.3-36  </h6>
 
 <h1> Testing Polyfill NPM </h1>
 <a href="https://hpssjellis.github.io/web-serial-polyfill/index.html">My Polyfill Index page</a><br><br>
@@ -39,8 +39,8 @@ This one is just testing Connections abilities. Not doing anything else. See the
 async function myPoly(){  
    serial.requestPort().then(async (serialPort) => {
                                                                    
-      mySerial = serialPort;
-                                 
+      mySerial = serialPort;   
+      document.getElementById('myDiv01').innerHTML +='<b>serial: </b>'+  JSON.stringify(serial, null, '<br>')+ '<br><br>'                                   
       console.log('mySerial')                    
       console.log(mySerial)   
                                             
@@ -53,8 +53,7 @@ async function myPoly(){
                                             
 // now run it
 myPoly()
-document.getElementById('myDiv01').innerHTML  ='<b>exports: </b>'+  JSON.stringify(exports, null, '<br>') + '<br><br>'   
-document.getElementById('myDiv01').innerHTML +='<b>serial: </b>'+  JSON.stringify(serial, null, '<br>')+ '<br><br>'                                            
+document.getElementById('myDiv01').innerHTML  ='<b>exports: </b>'+  JSON.stringify(exports, null, '<br>') + '<br><br>'                                      
                                             
 }"><br><br>
 
