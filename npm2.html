@@ -1,4 +1,4 @@
-<h6>  Version 0.0.2-12  </h6>
+<h6>  Version 0.0.2-14  </h6>
 
 <h1> Testing Polyfill NPM </h1>
 <a href="https://hpssjellis.github.io/web-serial-polyfill/index.html">My Polyfill Index page</a><br><br>
@@ -61,8 +61,8 @@ async function myPolyConnect(){
 <input type=button value="GetDevice Info" onclick="{                                                 
     const results = mySerial.getInfo();
     console.log('get info results', results);
-    document.getElementById("usbVendorId").textContent = results.usbVendorId;
-    document.getElementById("usbProductId").textContent = results.usbProductId;                                                   
+    document.getElementById('usbVendorId').textContent = results.usbVendorId;
+    document.getElementById('usbProductId').textContent = results.usbProductId;                                                   
 }">
 
 
