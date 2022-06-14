@@ -1,4 +1,4 @@
-<h6>  Version 0.0.3-32  </h6>
+<h6>  Version 0.0.3-33  </h6>
 
 <h1> Testing Polyfill NPM </h1>
 <a href="https://hpssjellis.github.io/web-serial-polyfill/index.html">My Polyfill Index page</a><br><br>
@@ -32,15 +32,18 @@ This one is just testing Connections abilities. Not doing anything else. See the
 <input type=button value="Connect" onclick="{
                                             
   console.log('exports')                    
-  console.log(exports) 
+  console.log(exports)              
+
    
    
 async function myPoly(){  
    serial.requestPort().then(async (serialPort) => {
+                                                                   
       mySerial = serialPort;
+                                 
+      console.log('mySerial')                    
+      console.log(mySerial)   
                                             
-      document.getElementById('myDiv01').innerHTML  ='exports: '+ exports + '<br><br>'
-      document.getElementById('myDiv01').innerHTML +='serial: '+ serial + '<br><br>'
       await mySerial.open({baudRate: 115200});
       reader = mySerial.readable.getReader();
       writer = mySerial.writable.getWriter();    
@@ -50,7 +53,8 @@ async function myPoly(){
                                             
 // now run it
 myPoly()
-                                            
+document.getElementById('myDiv01').innerHTML  ='exports: '+ exports + '<br><br>'
+document.getElementById('myDiv01').innerHTML +='serial: '+ serial + '<br><br>'                                            
                                             
 }"><br><br>
 
