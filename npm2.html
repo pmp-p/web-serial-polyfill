@@ -1,4 +1,4 @@
-<h6>  Version 0.0.3-37  </h6>
+<h6>  Version 0.0.3-39  </h6>
 
 <h1> Testing Polyfill NPM </h1>
 <a href="https://hpssjellis.github.io/web-serial-polyfill/index.html">My Polyfill Index page</a><br><br>
@@ -41,7 +41,7 @@ async function myPoly(){
                                             
       document.getElementById('myDiv01').innerHTML  = await '<b>exports: </b>'+  JSON.stringify(exports, null, '<br>') + '<br><br>'                                                              
       mySerial = serialPort;   
-      document.getElementById('myDiv01').innerHTML += await '<b>serial: </b>'+  JSON.stringify(serial, null, '<br>')+ '<br><br>'                                   
+      document.getElementById('myDiv01').innerHTML += await '<b>mySerial: </b>'+  JSON.stringify(mySerial, null, '<br>')+ '<br><br>'                                   
       console.log('mySerial')                    
       console.log(mySerial)   
                                             
