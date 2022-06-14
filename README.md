@@ -5,7 +5,7 @@
 
 demo
 
-https://hpssjellis.github.io/web-serial-polyfill/demo.html
+https://hpssjellis.github.io/web-serial-polyfill/index.html
 
 
 
