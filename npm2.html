@@ -1,4 +1,4 @@
-<h6>Version 0.0.1-2</h6>
+<h6>Version 0.0.1-3</h6>
 
 <h1> Testing Polyfill NPM </h1>
 <a href="https://hpssjellis.github.io/web-serial-polyfill/index.html">My Polyfill Index page</a><br><br>
@@ -12,9 +12,28 @@ Presently using this npm you might want to update the version<br>
 
 <input type=button value=Connect onclick="{
                                           
-  alert(""button check)                                          
+  alert("button check")                                          
 }">
 
+<input type="text" id="inputText"/>
+
+<input type=button value="Send" onclick="{
+                                          
+  alert("button check")                                          
+}">
+<input type=button value="Read" onclick="{
+                                          
+  alert("button check")                                          
+}">
+
+<p>USB vendor ID: <span id="usbVendorId"/></p>
+<p>USB product ID: <span id="usbProductId"/></p>
+
+<button id='getInfo'>Get Serial Info</button>
+
+<p id='ReceivedText'></p>
+
+<script>var exports = {};</script>
 
 
 
