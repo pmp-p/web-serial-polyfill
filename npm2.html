@@ -1,4 +1,4 @@
-<h6>  Version 0.0.3-28  </h6>
+<h6>  Version 0.0.3-29  </h6>
 
 <h1> Testing Polyfill NPM </h1>
 <a href="https://hpssjellis.github.io/web-serial-polyfill/index.html">My Polyfill Index page</a><br><br>
@@ -6,7 +6,7 @@
 Presently using this npm you might want to update the version<br>
 <pre>https://cdn.jsdelivr.net/web-serial-polyfill@1.0.13/dist/serial.js</pre> 
  
-This one is just testing Connections abilities. Not doing anything else. See the next html
+This one is just testing Connections abilities. Not doing anything else. See the next npm3.html<br>
 
 <script>
   //Global Variables
@@ -46,8 +46,8 @@ async function myPoly(){
                                             
 // now run it
 myPoly()
-document.getElmentById('myDiv01).innerHTML ='exports: '+ exports + '<br><br>'
-document.getElmentById('myDiv01).innerHTML +='serial: '+ serial + '<br><br>'
+document.getElmentById('myDiv01').innerHTML ='exports: '+ exports + '<br><br>'
+document.getElmentById('myDiv01').innerHTML +='serial: '+ serial + '<br><br>'
                                             
                                             
 }"><br><br>
@@ -63,8 +63,9 @@ document.getElmentById('myDiv01).innerHTML +='serial: '+ serial + '<br><br>'
                                           
   alert('button check')                                          
 }">
+
 <p id='ReceivedText'>...</p>
-<div id="myDiv01">...</div>
+<div id='myDiv01'>...</div>
 
 <p>USB Device Vendor ID: <span id="usbVendorId"/></p>
 <p>USB Device Product ID: <span id="usbProductId"/></p>
