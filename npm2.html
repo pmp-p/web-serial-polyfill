@@ -28,15 +28,13 @@ Presently using this npm you might want to update the version<br>
                                                                                                    
   serial.getPorts().then(async (serialDevices) => {
       if(serialDevices.length > 0) {
-        //probably want to do some checks here to make sure you get the correct device.  We are just grabbing the first for the demo
-        mySerial = serialDevices[0];
-        await mySerial.open({baudRate: 115200});
-        reader = mySerial.readable.getReader();
-        writer = mySerial.writable.getWriter();
+         //probably want to do some checks here to make sure you get the correct device.  We are just grabbing the first for the demo
+         mySerial = serialDevices[0];
+         await mySerial.open({baudRate: 115200});
+         reader = mySerial.readable.getReader();
+         writer = mySerial.writable.getWriter();
       }
     })
-}
- 
 
                                             
 }"><br><br>
