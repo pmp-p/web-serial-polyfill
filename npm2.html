@@ -1,4 +1,4 @@
-<h6>  Version 0.0.2-26  </h6>
+<h6>  Version 0.0.2-27  </h6>
 
 <h1> Testing Polyfill NPM </h1>
 <a href="https://hpssjellis.github.io/web-serial-polyfill/index.html">My Polyfill Index page</a><br><br>
@@ -37,9 +37,8 @@ async function myPoly(){
       mySerial = serialPort;
       await mySerial.open({baudRate: 115200});
       reader = mySerial.readable.getReader();
-      writer = mySerial.writable.getWriter();                                  
-                                                                            
-   }
+      writer = mySerial.writable.getWriter();                                                                                                              
+   })
 }
                                             
 // now run it
