@@ -1,0 +1,327 @@
+<h6>Version 0.0.1-1</h6>
+
+<h1> Testing Polyfill NPM </h1>
+<a href="https://hpssjellis.github.io/web-serial-polyfill/index.html">My Polyfill Index page</a><br><br>
+  
+Presently using this npm you might want to update the version<br>
+<pre>https://cdn.jsdelivr.net/web-serial-polyfill@1.0.13/dist/serial.js</pre> 
+  
+  
+<script src="https://cdn.jsdelivr.net/web-serial-polyfill@1.0.13/dist/serial.js"> </script> 
+
+
+
+<pre>
+
+
+/**
+ * Utility function to get the interface implementing a desired class.
+ * @param {USBDevice} device The USB device.
+ * @param {number} classCode The desired interface class.
+ * @return {USBInterface} The first interface found that implements the desired
+ * class.
+ * @throws TypeError if no interface is found.
+ */
+function findInterface(device, classCode) 
+
+
+/**
+ * Utility function to get an endpoint with a particular direction.
+ * @param {USBInterface} iface The interface to search.
+ * @param {USBDirection} direction The desired transfer direction.
+ * @return {USBEndpoint} The first endpoint with the desired transfer direction.
+ * @throws TypeError if no endpoint is found.
+ */
+function findEndpoint(iface, direction) 
+
+
+
+/**
+ * Implementation of the underlying source API[1] which reads data from a USB
+ * endpoint. This can be used to construct a ReadableStream.
+ *
+ * [1]: https://streams.spec.whatwg.org/#underlying-source-api
+ */
+class UsbEndpointUnderlyingSource {
+    /**
+     * Constructs a new UnderlyingSource that will pull data from the specified
+     * endpoint on the given USB device.
+     *
+     * @param {USBDevice} device
+     * @param {USBEndpoint} endpoint
+     * @param {function} onError function to be called on error
+     */
+    constructor(device, endpoint, onError) {
+        this.device_ = device;
+        this.endpoint_ = endpoint;
+        this.onError_ = onError;
+    }
+    /**
+     * Reads a chunk of data from the device.
+     *
+     * @param {ReadableStreamDefaultController} controller
+     */
+    pull(controller) 
+    
+    
+    
+    
+/**
+ * Implementation of the underlying sink API[2] which writes data to a USB
+ * endpoint. This can be used to construct a WritableStream.
+ *
+ * [2]: https://streams.spec.whatwg.org/#underlying-sink-api
+ */
+class UsbEndpointUnderlyingSink {
+    /**
+     * Constructs a new UnderlyingSink that will write data to the specified
+     * endpoint on the given USB device.
+     *
+     * @param {USBDevice} device
+     * @param {USBEndpoint} endpoint
+     * @param {function} onError function to be called on error
+     */
+    constructor(device, endpoint, onError) {
+        this.device_ = device;
+        this.endpoint_ = endpoint;
+        this.onError_ = onError;
+    }
+    /**
+     * Writes a chunk to the device.
+     *
+     * @param {Uint8Array} chunk
+     * @param {WritableStreamDefaultController} controller
+     */
+    async write(chunk, controller)
+    
+    
+    
+    
+/** a class used to control serial devices over WebUSB */
+class SerialPort {
+    /**
+     * constructor taking a WebUSB device that creates a SerialPort instance.
+     * @param {USBDevice} device A device acquired from the WebUSB API
+     * @param {SerialPolyfillOptions} polyfillOptions Optional options to
+     * configure the polyfill.
+     */
+    constructor(device, polyfillOptions)
+    
+    
+    
+    /**
+     * Getter for the readable attribute. Constructs a new ReadableStream as
+     * necessary.
+     * @return {ReadableStream} the current readable stream
+     */
+    get readable() 
+    
+    
+    
+    
+    
+    /**
+     * Getter for the writable attribute. Constructs a new WritableStream as
+     * necessary.
+     * @return {WritableStream} the current writable stream
+     */
+    get writable()
+    
+    
+    
+    
+    /**
+     * a function that opens the device and claims all interfaces needed to
+     * control and communicate to and from the serial device
+     * @param {SerialOptions} options Object containing serial options
+     * @return {Promise<void>} A promise that will resolve when device is ready
+     * for communication
+     */
+    async open(options) {
+    
+    
+    
+    
+    /**
+     * Closes the port.
+     *
+     * @return {Promise<void>} A promise that will resolve when the port is
+     * closed.
+     */
+    async close()
+    
+    
+    
+    
+    
+    /**
+     * A function that returns properties of the device.
+     * @return {SerialPortInfo} Device properties.
+     */
+    getInfo() {
+        return {
+            usbVendorId: this.device_.vendorId,
+            usbProductId: this.device_.productId,
+        };
+    }
+    
+    
+    
+    
+    
+    /**
+     * A function used to change the serial settings of the device
+     * @param {object} options the object which carries serial settings data
+     * @return {Promise<void>} A promise that will resolve when the options are
+     * set
+     */
+    reconfigure(options) 
+    
+    
+    
+    
+    /**
+     * Sets control signal state for the port.
+     * @param {SerialOutputSignals} signals The signals to enable or disable.
+     * @return {Promise<void>} a promise that is resolved when the signal state
+     * has been changed.
+     */
+    async setSignals(signals) 
+    
+    
+    
+    
+    
+    
+    /**
+     * Checks the serial options for validity and throws an error if it is
+     * not valid
+     */
+    validateOptions() 
+    
+    
+    
+    
+    /**
+     * Checks the baud rate for validity
+     * @param {number} baudRate the baud rate to check
+     * @return {boolean} A boolean that reflects whether the baud rate is valid
+     */
+    isValidBaudRate(baudRate) 
+    
+    
+    
+    
+    
+    /**
+     * Checks the stop bits for validity
+     * @param {number} stopBits the stop bits to check
+     * @return {boolean} A boolean that reflects whether the stop bits setting is
+     * valid
+     */
+    isValidStopBits(stopBits) 
+    
+    
+    
+    
+    
+    /**
+     * Checks the parity for validity
+     * @param {string} parity the parity to check
+     * @return {boolean} A boolean that reflects whether the parity is valid
+     */
+    isValidParity(parity)
+    
+    
+    
+    
+    
+    /**
+     * sends the options alog the control interface to set them on the device
+     * @return {Promise} a promise that will resolve when the options are set
+     */
+    async setLineCoding()
+    
+    
+    
+    
+    
+    
+    
+exports.SerialPort = SerialPort;
+/** implementation of the global navigator.serial object */
+class Serial {
+    /**
+     * Requests permission to access a new port.
+     *
+     * @param {SerialPortRequestOptions} options
+     * @param {SerialPolyfillOptions} polyfillOptions
+     * @return {Promise<SerialPort>}
+     */
+    async requestPort(options, polyfillOptions) 
+    
+    
+    
+    
+    
+    /**
+     * Get the set of currently available ports.
+     *
+     * @param {SerialPolyfillOptions} polyfillOptions Polyfill configuration that
+     * should be applied to these ports.
+     * @return {Promise<SerialPort[]>} a promise that is resolved with a list of
+     * ports.
+     */
+    async getPorts(polyfillOptions) 
+    
+    
+    
+    
+/* an object to be used for starting the serial workflow */
+exports.serial = new Serial();
+//# sourceMappingURL=serial.js.map
+
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Main Github <a href="https://github.com/google/web-serial-polyfill">web-serial-polyfill</a><br>
+
+My Fork of the above github <a href="https://github.com/hpssjellis/web-serial-polyfill">my WebSerial Polyfill</a><br>
+
+
+
