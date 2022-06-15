@@ -1,4 +1,4 @@
-<h6>  Version 0.1.0-45 </h6>
+<h6>  Version 0.1.0-46 </h6>
 
 <h1> Testing Polyfill NPM </h1>
 <a href="https://hpssjellis.github.io/web-serial-polyfill/index.html">My Polyfill Index page</a><br><br>
@@ -44,7 +44,7 @@ Presently using this npm you might want to update the version<br>
 <input type=button value="Connect" onclick="{                                                
   async function myPoly(){  
     const myRequest = serial.requestPort()
-    const mySerial  = serial.serialPort(myRequest)
+    const mySerial  = SerialPort(myRequest)
     document.getElementById('myDiv01').innerHTML += await '<b>mySerial: </b>'+  JSON.stringify(mySerial, null, '<br>')+ '<br><br>'                                   
     console.log('mySerial')                    
     console.log(mySerial)   
