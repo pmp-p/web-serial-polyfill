@@ -1,4 +1,4 @@
-<h6>  Version 0.1.5-77 </h6>
+<h6>  Version 0.1.5-78 </h6>
 
 <h1> Testing Polyfill NPM </h1>
 <a href="https://hpssjellis.github.io/web-serial-polyfill/index.html">My Polyfill Index page</a><br><br>
@@ -20,7 +20,7 @@ Presently using this npm you might want to update the version<br>
   //Global Variables
   var serial = exports.serial;  // is this needed as defined in the npm
  
-
+  let myLooping  // for read setinterval
   var mySerial;
   //let receivedText = '';
   let reader = {};
@@ -39,6 +39,19 @@ Presently using this npm you might want to update the version<br>
   } 
   
   
+  
+async function myRead(){  
+    reader.read().then(({value}) => {        
+        document.getElementById('myDiv01').innerHTML = '<br><br><b>reader: </b><br><pre>' +  JSON.stringify(reader, null, 3) + '</pre><br><br>'                                           
+        let receivedText = ab2str(value);
+        document.getElementById('ReceivedText').innerHTML = receivedText + '<br>' + document.getElementById('ReceivedText').innerHTML
+      },
+      error => {console.error('error from read', error)}
+    );
+}
+  
+  
+  
 </script>
 
 <input type=button value="Connect" onclick="{  
@@ -50,15 +63,10 @@ Presently using this npm you might want to update the version<br>
                                             
   async function myPoly(){  
     mySerial = await serial.requestPort()
-    
-    const myArraySerial = await Object.values(mySerial);                                        
-  //  document.getElementById('myDiv01').innerHTML += await '<b>mySerial: </b>' +  myArraySerial + '<br><br>'
-  //  document.getElementById('myDiv01').innerHTML += await '<b>mySerial: </b>' +  JSON.stringify(myArraySerial, null, '<br>') + '<br><br>' 
-     // attempt at some nice formatting                                       
+                                                                     
     document.getElementById('myDiv01').innerHTML += await '<b>mySerial: </b><br><pre>' +  JSON.stringify(mySerial, null, 3) + '</pre><br><br>'      
                                             
-                                            
-                                            
+                                                                                     
     console.log('mySerial')                    
     console.log(mySerial)   
 
@@ -91,9 +99,6 @@ async function mySend(){
       console.log(myWritten)
                                          
       document.getElementById('myDiv01').innerHTML = '<br><br><b>myWriter: </b><br><pre>' +  JSON.stringify(myWritten, null, 3) + '</pre><br><br>'  
-     // const myArray = Object.values(myWritten);
-     // document.getElementById('myDiv01').innerHTML =   JSON.stringify(myWritten, null, '<br>')+ '<br><br>'  
-    //  document.getElementById('myDiv01').innerHTML =   myArray + '<br><br>'  
                                             
    
     })    
@@ -102,20 +107,17 @@ mySend()
 }"><br><br>
 
 <input type=button value="Read to ..." onclick="{
-
-async function myRead(){  
-    reader.read().then(({value}) => {        
-        document.getElementById('myDiv01').innerHTML = '<br><br><b>reader: </b><br><pre>' +  JSON.stringify(reader, null, 3) + '</pre><br><br>'                                           
-        let receivedText = ab2str(value);
-        document.getElementById('ReceivedText').innerHTML = receivedText + '<br>' + document.getElementById('ReceivedText').innerHTML
-      },
-      error => {console.error('error from read', error)}
-    );
-}
-myRead()
-                                                 
-                                       
+   clearInterval(myLooping)
+   myRead()
 }"><br>
+
+<input type=button value="Read loop every second" onclick="{
+   clearInterval(myLooping)
+   myLooping = setInterval(myRead, 1000);                                           
+}"><br>
+
+
+//setInterval(displayHello, 1000);
 
 <p id='ReceivedText'>...</p>
 
@@ -125,12 +127,6 @@ myRead()
 <div id='myDiv01'>...</div>
 
 
-<input type=button value="GetDevice Info" onclick="{                                                 
-    const results = mySerial.getInfo();
-    console.log('get info results', results);
-    document.getElementById('usbVendorId').textContent = results.usbVendorId;
-    document.getElementById('usbProductId').textContent = results.usbProductId;                                                   
-}"><br><br>
 
 
 
