@@ -1,4 +1,4 @@
-<h6>  Version 0.1.5-73 </h6>
+<h6>  Version 0.1.5-74 </h6>
 
 <h1> Testing Polyfill NPM </h1>
 <a href="https://hpssjellis.github.io/web-serial-polyfill/index.html">My Polyfill Index page</a><br><br>
@@ -63,11 +63,13 @@ Presently using this npm you might want to update the version<br>
     console.log(mySerial)   
 
     const myOpen = await mySerial.open({baudRate: 115200});
-    reader = mySerial.readable.getReader();   
-   // document.getElementById('myDiv01').innerHTML += await '<br><br><b>reader: </b><br><pre>' +  JSON.stringify(reader, null, 3) + '</pre><br><br>'  
+    reader = mySerial.readable.getReader();                                              
+    writer = mySerial.writable.getWriter();    
                                             
-    writer = mySerial.writable.getWriter();     
-   // document.getElementById('myDiv01').innerHTML += await '<br><br><b>writer: </b><br><pre>' +  JSON.stringify(writer, null, 3) + '</pre><br><br>'                                         
+    const results = mySerial.getInfo();
+    console.log('get info results', results);
+    document.getElementById('usbVendorId').textContent = results.usbVendorId;
+    document.getElementById('usbProductId').textContent = results.usbProductId;                                     
   }
                                             
 // now run it
@@ -80,7 +82,8 @@ myPoly()
 <input type=button value="Send" onclick="{
 
 async function mySend(){  
-    writer.ready.then(() => {
+    writer.ready.then(() => {                                         
+      document.getElementById('myDiv01').innerHTML += await '<br><br><b>writer: </b><br><pre>' +  JSON.stringify(writer, null, 3) + '</pre><br><br>'  
       let inputArrayBuffer = str2ab(document.getElementById('inputText').value);
       const myWritten = writer.write(inputArrayBuffer);
       console.log('myWritten')
@@ -92,14 +95,14 @@ async function mySend(){
    
     })    
 }
-mySend()
-document.getElementById('myDiv01').innerHTML += await '<br><br><b>writer: </b><br><pre>' +  JSON.stringify(writer, null, 3) + '</pre><br><br>'                                    
+mySend()                                  
 }"><br><br>
 
 <input type=button value="Read to ..." onclick="{
 
 async function myRead(){  
-    reader.read().then(({value}) => {
+    reader.read().then(({value}) => {        
+        document.getElementById('myDiv01').innerHTML += await '<br><br><b>reader: </b><br><pre>' +  JSON.stringify(reader, null, 3) + '</pre><br><br>'                                           
         let receivedText = ab2str(value);
         document.getElementById('ReceivedText').innerHTML = receivedText + '<br>' + document.getElementById('ReceivedText').innerHTML
       },
@@ -107,16 +110,16 @@ async function myRead(){
     );
 }
 myRead()
-
-document.getElementById('myDiv01').innerHTML += await '<br><br><b>reader: </b><br><pre>' +  JSON.stringify(reader, null, 3) + '</pre><br><br>'                                                     
+                                                 
                                        
 }"><br>
+
+<p>USB Device Vendor ID: <span id="usbVendorId"/></p> 
+<p>USB Device Product ID: <span id="usbProductId"/></p>Note: These are different than expected and that is ok
 
 <p id='ReceivedText'>...</p>
 <div id='myDiv01'>...</div>
 
-<p>USB Device Vendor ID: <span id="usbVendorId"/></p>
-<p>USB Device Product ID: <span id="usbProductId"/></p>
 
 <input type=button value="GetDevice Info" onclick="{                                                 
     const results = mySerial.getInfo();
