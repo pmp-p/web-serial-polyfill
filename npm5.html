@@ -1,4 +1,4 @@
-<h6>  Version 0.1.4-72 </h6>
+<h6>  Version 0.1.5-73 </h6>
 
 <h1> Testing Polyfill NPM </h1>
 <a href="https://hpssjellis.github.io/web-serial-polyfill/index.html">My Polyfill Index page</a><br><br>
@@ -64,10 +64,10 @@ Presently using this npm you might want to update the version<br>
 
     const myOpen = await mySerial.open({baudRate: 115200});
     reader = mySerial.readable.getReader();   
-    document.getElementById('myDiv01').innerHTML += await '<br><br><b>reader: </b><br><pre>' +  JSON.stringify(reader, null, 3) + '</pre><br><br>'  
+   // document.getElementById('myDiv01').innerHTML += await '<br><br><b>reader: </b><br><pre>' +  JSON.stringify(reader, null, 3) + '</pre><br><br>'  
                                             
     writer = mySerial.writable.getWriter();     
-    document.getElementById('myDiv01').innerHTML += await '<br><br><b>writer: </b><br><pre>' +  JSON.stringify(writer, null, 3) + '</pre><br><br>'                                         
+   // document.getElementById('myDiv01').innerHTML += await '<br><br><b>writer: </b><br><pre>' +  JSON.stringify(writer, null, 3) + '</pre><br><br>'                                         
   }
                                             
 // now run it
@@ -85,13 +85,15 @@ async function mySend(){
       const myWritten = writer.write(inputArrayBuffer);
       console.log('myWritten')
       console.log(myWritten)
-      const myArray = Object.values(myWritten);
+     // const myArray = Object.values(myWritten);
      // document.getElementById('myDiv01').innerHTML =   JSON.stringify(myWritten, null, '<br>')+ '<br><br>'  
-      document.getElementById('myDiv01').innerHTML =   myArray + '<br><br>'  
+    //  document.getElementById('myDiv01').innerHTML =   myArray + '<br><br>'  
+                                            
+   
     })    
 }
 mySend()
-                                   
+document.getElementById('myDiv01').innerHTML += await '<br><br><b>writer: </b><br><pre>' +  JSON.stringify(writer, null, 3) + '</pre><br><br>'                                    
 }"><br><br>
 
 <input type=button value="Read to ..." onclick="{
@@ -99,14 +101,14 @@ mySend()
 async function myRead(){  
     reader.read().then(({value}) => {
         let receivedText = ab2str(value);
-        if (receivedText != ''){
-           document.getElementById('ReceivedText').innerHTML = receivedText + '<br>' + document.getElementById('ReceivedText').innerHTML
-        }
+        document.getElementById('ReceivedText').innerHTML = receivedText + '<br>' + document.getElementById('ReceivedText').innerHTML
       },
       error => {console.error('error from read', error)}
     );
 }
 myRead()
+
+document.getElementById('myDiv01').innerHTML += await '<br><br><b>reader: </b><br><pre>' +  JSON.stringify(reader, null, 3) + '</pre><br><br>'                                                     
                                        
 }"><br>
 
