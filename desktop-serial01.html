@@ -1,4 +1,4 @@
-<h6> Version 0.0.1-5  </h6>
+<h6> Version 0.0.1-7  </h6>
 
 
 
@@ -18,9 +18,8 @@ class SerialHandler {
    * After opening the port, a `writer` and a `reader` are set; they will be used by the `write` and `read` methods respectively.
    */
 async function init() {
-    if ('serial' in navigator) {
       try {
-        const port = await (navigator as any).serial.requestPort();
+        const port = await navigator.serial.requestPort();
         document.getElementById('myDiv01').innerHTML += await '<br><br><b>port: </b><br><pre>' +  JSON.stringify(port, null, 3) + '</pre><br><br>' 
         await port.open({ baudRate: 115200 }); // `baudRate` was `baudrate` in previous versions.
 
@@ -32,9 +31,7 @@ async function init() {
       } catch(err) {
         console.error('There was an error opening the serial port:', err);
       }
-    } else {
-      console.error('Web serial doesn\'t seem to be enabled in your browser. Check https://developer.mozilla.org/en-US/docs/Web/API/Web_Serial_API#browser_compatibility for more info.')
-    }
+
   }
 
   /**
