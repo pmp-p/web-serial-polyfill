@@ -46,7 +46,7 @@ Presently using this npm you might want to update the version<br>
  // const myArrayExports = Object.values(exports);                                        
  // document.getElementById('myDiv01').innerHTML += '<b>exports: </b>' +  myArrayExports + '<br><br>'  
                                             
-  document.getElementById('myDiv01').innerHTML += await '<br><br><b>exports: </b><br><pre>' +  JSON.stringify(exports, null, 3) + '</pre><br><br>'    
+  document.getElementById('myDiv01').innerHTML += '<br><br><b>exports: </b><br><pre>' +  JSON.stringify(exports, null, 3) + '</pre><br><br>'    
                                             
   async function myPoly(){  
     mySerial = await serial.requestPort()
