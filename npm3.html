@@ -1,4 +1,4 @@
-<h6>  Version 0.0.3-41  </h6>
+<h6>  Version 0.0.3-42  </h6>
 
 <h1> Testing Polyfill NPM </h1>
 <a href="https://hpssjellis.github.io/web-serial-polyfill/index.html">My Polyfill Index page</a><br><br>
@@ -78,7 +78,7 @@ myPoly()
 
 <input type=button value="Send" onclick="{
 
-async function mySen(){  
+async function mySend(){  
     writer.ready.then(() => {
       let inputArrayBuffer = str2ab(document.getElementById("inputText").value);
       return writer.write(inputArrayBuffer);
