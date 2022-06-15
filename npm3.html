@@ -1,4 +1,4 @@
-<h6>  Version 0.0.3-39  </h6>
+<h6>  Version 0.0.3-40  </h6>
 
 <h1> Testing Polyfill NPM </h1>
 <a href="https://hpssjellis.github.io/web-serial-polyfill/index.html">My Polyfill Index page</a><br><br>
@@ -25,6 +25,21 @@ This one is just testing Connections abilities. Not doing anything else. See the
   let receivedText = '';
   let reader = {};
   let writer = {};
+  
+   str2ab = function(str) {
+    var buf = new Uint8Array(str.length); // 1 byte for each char
+    for (var i=0, strLen=str.length; i < strLen; i++) {
+      buf[i] = str.charCodeAt(i);
+    }
+    return buf;
+  }
+
+  ab2str = function(buf) {
+    return String.fromCharCode.apply(null, buf);
+  } 
+  
+  
+  
 </script>
 
 
@@ -75,22 +90,6 @@ mySend()
 }"><br>
 
 <input type=button value="Read to ..." onclick="{
-
-
-  str2ab = function(str) {
-    var buf = new Uint8Array(str.length); // 1 byte for each char
-    for (var i=0, strLen=str.length; i < strLen; i++) {
-      buf[i] = str.charCodeAt(i);
-    }
-    return buf;
-  }
-
-  ab2str = function(buf) {
-    return String.fromCharCode.apply(null, buf);
-  }
-
-
-
 
 async function myRead(){  
     reader.read().then(({value}) => {
