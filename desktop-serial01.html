@@ -1,4 +1,4 @@
-<h6> Version 0.0.1-3  </h6>
+<h6> Version 0.0.1-4  </h6>
 
 
 
@@ -21,6 +21,7 @@ class SerialHandler {
     if ('serial' in navigator) {
       try {
         const port = await (navigator as any).serial.requestPort();
+        document.getElementById('myDiv01').innerHTML += await '<br><br><b>port: </b><br><pre>' +  JSON.stringify(port, null, 3) + '</pre><br><br>' 
         await port.open({ baudRate: 115200 }); // `baudRate` was `baudrate` in previous versions.
 
         this.writer = port.writable.getWriter();
@@ -73,7 +74,8 @@ const serialHandler = new SerialHandler();
 
 <input type=button value="connect" onclcik="{
 async function mySerialConnect(){ 
-  alert()   
+  alert()  
+  init()
 }
                                             
  mySerialConnect()                                           
