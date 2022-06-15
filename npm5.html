@@ -1,4 +1,4 @@
-<h6>  Version 0.1.5-74 </h6>
+<h6>  Version 0.1.5-75 </h6>
 
 <h1> Testing Polyfill NPM </h1>
 <a href="https://hpssjellis.github.io/web-serial-polyfill/index.html">My Polyfill Index page</a><br><br>
@@ -83,7 +83,7 @@ myPoly()
 
 async function mySend(){  
     writer.ready.then(() => {                                         
-      document.getElementById('myDiv01').innerHTML += await '<br><br><b>writer: </b><br><pre>' +  JSON.stringify(writer, null, 3) + '</pre><br><br>'  
+      document.getElementById('myDiv01').innerHTML += '<br><br><b>writer: </b><br><pre>' +  JSON.stringify(writer, null, 3) + '</pre><br><br>'  
       let inputArrayBuffer = str2ab(document.getElementById('inputText').value);
       const myWritten = writer.write(inputArrayBuffer);
       console.log('myWritten')
@@ -102,7 +102,7 @@ mySend()
 
 async function myRead(){  
     reader.read().then(({value}) => {        
-        document.getElementById('myDiv01').innerHTML += await '<br><br><b>reader: </b><br><pre>' +  JSON.stringify(reader, null, 3) + '</pre><br><br>'                                           
+        document.getElementById('myDiv01').innerHTML += '<br><br><b>reader: </b><br><pre>' +  JSON.stringify(reader, null, 3) + '</pre><br><br>'                                           
         let receivedText = ab2str(value);
         document.getElementById('ReceivedText').innerHTML = receivedText + '<br>' + document.getElementById('ReceivedText').innerHTML
       },
