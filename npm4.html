@@ -1,4 +1,4 @@
-<h6>  Version 0.1.2-56 </h6>
+<h6>  Version 0.1.2-57 </h6>
 
 <h1> Testing Polyfill NPM </h1>
 <a href="https://hpssjellis.github.io/web-serial-polyfill/index.html">My Polyfill Index page</a><br><br>
@@ -63,13 +63,14 @@ myPoly()
 <input type=button value="Send" onclick="{
 
 async function mySend(){  
-    writer.ready.then(() => {
-      let inputArrayBuffer = str2ab(document.getElementById('inputText').value);
-      return writer.write(inputArrayBuffer);
-    })    
+  //  writer.ready.then(() => {
+   const myRead = await writer.ready()
+   let inputArrayBuffer = await str2ab(document.getElementById('inputText').value);
+   document.getElementById('myDiv01').innerHTML += await writer.write(inputArrayBuffer);
+       
 }
 
-mySend()
+ mySend()
                                    
 }"><br>
 
@@ -78,11 +79,11 @@ mySend()
 async function myRead(){  
    // reader.read().then(({value}) => {
    try { 
-     myValue = await reader.read()
+     const myValue = await reader.read()
      receivedText += ab2str(myValue);
      document.getElementById('ReceivedText').innerHTML = receivedText
    }   
-   catch(err) {console.error('error from read', error)
+   catch(err) {console.error('error from read', err)
    }
     
 }
