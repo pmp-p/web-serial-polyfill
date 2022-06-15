@@ -1,4 +1,4 @@
-<h6>  Version 0.1.4-70 </h6>
+<h6>  Version 0.1.4-71 </h6>
 
 <h1> Testing Polyfill NPM </h1>
 <a href="https://hpssjellis.github.io/web-serial-polyfill/index.html">My Polyfill Index page</a><br><br>
@@ -51,7 +51,9 @@ Presently using this npm you might want to update the version<br>
     
     const myArraySerial = await Object.values(mySerial);                                        
   //  document.getElementById('myDiv01').innerHTML += await '<b>mySerial: </b>' +  myArraySerial + '<br><br>'
-    document.getElementById('myDiv01').innerHTML += await '<b>mySerial: </b>' +  JSON.stringify(myArraySerial, null, '<br>') + '<br><br>'      
+  //  document.getElementById('myDiv01').innerHTML += await '<b>mySerial: </b>' +  JSON.stringify(myArraySerial, null, '<br>') + '<br><br>' 
+     // attempt at some nice formatting                                       
+    document.getElementById('myDiv01').innerHTML += await '<b>mySerial: </b><br><pre>' +  JSON.stringify(mySerial, null, 3) + '</pre><br><br>'      
                                             
                                             
                                             
