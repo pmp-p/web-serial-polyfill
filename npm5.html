@@ -67,6 +67,8 @@ Presently using this npm you might want to update the version<br>
     writer = mySerial.writable.getWriter();    
                                             
     const results = mySerial.getInfo();
+    
+    document.getElementById('myDiv01').innerHTML += await 'Results:<b>: </b><br><pre>' +  JSON.stringify(results, null, 3) + '</pre><br><br>'                                          
     console.log('get info results', results);
     document.getElementById('usbVendorId').textContent = results.usbVendorId;
     document.getElementById('usbProductId').textContent = results.usbProductId;                                     
@@ -83,11 +85,12 @@ myPoly()
 
 async function mySend(){  
     writer.ready.then(() => {                                         
-      document.getElementById('myDiv01').innerHTML += '<br><br><b>writer: </b><br><pre>' +  JSON.stringify(writer, null, 3) + '</pre><br><br>'  
       let inputArrayBuffer = str2ab(document.getElementById('inputText').value);
       const myWritten = writer.write(inputArrayBuffer);
       console.log('myWritten')
       console.log(myWritten)
+                                         
+      document.getElementById('myDiv01').innerHTML += '<br><br><b>writer: </b><br><pre>' +  JSON.stringify(myWritten, null, 3) + '</pre><br><br>'  
      // const myArray = Object.values(myWritten);
      // document.getElementById('myDiv01').innerHTML =   JSON.stringify(myWritten, null, '<br>')+ '<br><br>'  
     //  document.getElementById('myDiv01').innerHTML =   myArray + '<br><br>'  
@@ -114,10 +117,11 @@ myRead()
                                        
 }"><br>
 
+<p id='ReceivedText'>...</p>
+
 <p>USB Device Vendor ID: <span id="usbVendorId"/></p> 
 <p>USB Device Product ID: <span id="usbProductId"/></p>Note: These are different than expected and that is ok
 
-<p id='ReceivedText'>...</p>
 <div id='myDiv01'>...</div>
 
 
