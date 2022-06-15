@@ -43,8 +43,10 @@ Presently using this npm you might want to update the version<br>
 
 <input type=button value="Connect" onclick="{  
   // just write these to the page
-  const myArrayExports = Object.values(exports);                                        
-  document.getElementById('myDiv01').innerHTML += '<b>exports: </b>' +  myArrayExports + '<br><br>'  
+ // const myArrayExports = Object.values(exports);                                        
+ // document.getElementById('myDiv01').innerHTML += '<b>exports: </b>' +  myArrayExports + '<br><br>'  
+                                            
+  document.getElementById('myDiv01').innerHTML += await '<br><br><b>exports: </b><br><pre>' +  JSON.stringify(exports, null, 3) + '</pre><br><br>'    
                                             
   async function myPoly(){  
     mySerial = await serial.requestPort()
@@ -61,8 +63,11 @@ Presently using this npm you might want to update the version<br>
     console.log(mySerial)   
 
     const myOpen = await mySerial.open({baudRate: 115200});
-    reader = mySerial.readable.getReader();
-    writer = mySerial.writable.getWriter();                                                
+    reader = mySerial.readable.getReader();   
+    document.getElementById('myDiv01').innerHTML += await '<br><br><b>reader: </b><br><pre>' +  JSON.stringify(reader, null, 3) + '</pre><br><br>'  
+                                            
+    writer = mySerial.writable.getWriter();     
+    document.getElementById('myDiv01').innerHTML += await '<br><br><b>writer: </b><br><pre>' +  JSON.stringify(writer, null, 3) + '</pre><br><br>'                                         
   }
                                             
 // now run it
