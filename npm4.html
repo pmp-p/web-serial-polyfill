@@ -1,4 +1,4 @@
-<h6>  Version 0.0.3-43  </h6>
+<h6>  Version 0.1.0-44  </h6>
 
 <h1> Testing Polyfill NPM </h1>
 <a href="https://hpssjellis.github.io/web-serial-polyfill/index.html">My Polyfill Index page</a><br><br>
@@ -38,40 +38,25 @@ Presently using this npm you might want to update the version<br>
     return String.fromCharCode.apply(null, buf);
   } 
   
-  
-  
+    
 </script>
 
+<input type=button value="Connect" onclick="{                                                
+  async function myPoly(){  
+    const myRequest = serial.requestPort()
+    const mySerial  = serialPort(myRequest)
+    document.getElementById('myDiv01').innerHTML += await '<b>mySerial: </b>'+  JSON.stringify(mySerial, null, '<br>')+ '<br><br>'                                   
+    console.log('mySerial')                    
+    console.log(mySerial)   
 
-
-<input type=button value="Connect" onclick="{
+    await mySerial.open({baudRate: 115200});
+    reader = mySerial.readable.getReader();
+    writer = mySerial.writable.getWriter();                                                
+  }
                                             
-  console.log('exports')                    
-  console.log(exports)              
-
-   
-   
-async function myPoly(){  
-  serial.requestPort().then(async (serialPort) => {
-                                            
-      document.getElementById('myDiv01').innerHTML  = await '<b>exports: </b>'+  JSON.stringify(exports, null, '<br>') + '<br><br>'                                                              
-      mySerial = serialPort;   
-      document.getElementById('myDiv01').innerHTML += await '<b>mySerial: </b>'+  JSON.stringify(mySerial, null, '<br>')+ '<br><br>'                                   
-      console.log('mySerial')                    
-      console.log(mySerial)   
-                                            
-      await mySerial.open({baudRate: 115200});
-      reader = mySerial.readable.getReader();
-      writer = mySerial.writable.getWriter();    
-                                            
-   })
-}
-       
-                                     
 // now run it
 myPoly()
-                                   
-                                            
+                                                                               
 }"><br><br>
 
 <input type="text" id="inputText"/>
