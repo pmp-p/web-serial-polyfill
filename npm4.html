@@ -43,13 +43,13 @@ Presently using this npm you might want to update the version<br>
 
 <input type=button value="Connect" onclick="{                                                
   async function myPoly(){  
-    const myRequest = serial.requestPort()
-    const mySerial  = new serialPort(myRequest)
+    const myRequest = await serial.requestPort()
+    const mySerial  = await serialPort(myRequest)
     document.getElementById('myDiv01').innerHTML += await '<b>mySerial: </b>'+  JSON.stringify(mySerial, null, '<br>')+ '<br><br>'                                   
     console.log('mySerial')                    
     console.log(mySerial)   
 
-    await mySerial.open({baudRate: 115200});
+    const myOpen = await mySerial.open({baudRate: 115200});
     reader = mySerial.readable.getReader();
     writer = mySerial.writable.getWriter();                                                
   }
