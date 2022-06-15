@@ -1,4 +1,4 @@
-<h6>  Version 0.0.3-37  </h6>
+<h6>  Version 0.0.3-38  </h6>
 
 <h1> Testing Polyfill NPM </h1>
 <a href="https://hpssjellis.github.io/web-serial-polyfill/index.html">My Polyfill Index page</a><br><br>
@@ -51,7 +51,8 @@ async function myPoly(){
                                             
    })
 }
-                                            
+       
+                                     
 // now run it
 myPoly()
                                    
@@ -61,13 +62,47 @@ myPoly()
 <input type="text" id="inputText"/>
 
 <input type=button value="Send" onclick="{
-                                          
-  alert('button check')                                          
+
+async function mySen(){  
+    writer.ready.then(() => {
+      let inputArrayBuffer = str2ab(document.getElementById("inputText").value);
+      return writer.write(inputArrayBuffer);
+    })    
+}
+
+mySend()
+                                   
 }"><br>
 
 <input type=button value="Read to ..." onclick="{
-                                          
-  alert('button check')                                          
+
+
+  str2ab = function(str) {
+    var buf = new Uint8Array(str.length); // 1 byte for each char
+    for (var i=0, strLen=str.length; i < strLen; i++) {
+      buf[i] = str.charCodeAt(i);
+    }
+    return buf;
+  }
+
+  ab2str = function(buf) {
+    return String.fromCharCode.apply(null, buf);
+  }
+
+
+
+
+async function myRead(){  
+    reader.read().then(({value}) => {
+        receivedText += ab2str(value);
+        document.getElementById("ReceivedText").innerHTML= receivedText
+      },
+      error => {console.error('error from read', error)}
+    );
+}
+
+myRead()
+                                       
 }">
 
 <p id='ReceivedText'>...</p>
