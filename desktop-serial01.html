@@ -23,8 +23,8 @@ async function init() {
         document.getElementById('myDiv01').innerHTML += await '<br><br><b>port: </b><br><pre>' +  JSON.stringify(port, null, 3) + '</pre><br><br>' 
         await port.open({ baudRate: 115200 }); // `baudRate` was `baudrate` in previous versions.
 
-        this.writer = port.writable.getWriter();
-        this.reader = port.readable.getReader();
+        let writer = port.writable.getWriter();
+        let reader = port.readable.getReader();
         
         const signals = await port.getSignals();
         console.log(signals);
@@ -39,7 +39,7 @@ async function init() {
    * @param data - A string of data that will be sent to the Serial port.
    * @returns An empty promise after the message has been written.
    */
-async function write(data: string): Promise<void> {
+async function write( string): Promise<void> {
     const dataArrayBuffer = this.encoder.encode(data);
     return await this.writer.write(dataArrayBuffer);
   }
