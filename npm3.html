@@ -95,7 +95,7 @@ mySend()
 async function myRead(){  
     reader.read().then(({value}) => {
         receivedText += ab2str(value);
-        document.getElementById("ReceivedText").innerHTML= receivedText
+        document.getElementById('ReceivedText').innerHTML= receivedText
       },
       error => {console.error('error from read', error)}
     );
