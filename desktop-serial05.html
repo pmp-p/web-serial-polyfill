@@ -36,7 +36,7 @@ document.getElementById('connectButton').addEventListener('click', () => {
   if (navigator.serial) {
     connectSerial();
   } else {
-    document.getElementById('target').innerHTML = 'Web Serial API not supported. Switching to Polyfill'
+    document.getElementById('myDiv01').innerHTML = 'Web Serial API not supported. Switching to Polyfill'
     myPoly()
 
   }
@@ -119,7 +119,6 @@ async function mySendIt(myData) {
   
 async function myRead(){  
     reader.read().then(({value}) => {        
-        document.getElementById('myDiv01').innerHTML = '<br><br><b>reader: </b><br><pre>' +  JSON.stringify(reader, null, 3) + '</pre><br><br>'                                           
         let receivedText = ab2str(value);
         document.getElementById('ReceivedText').innerHTML = receivedText + '<br>' + document.getElementById('ReceivedText').innerHTML
       },
@@ -144,7 +143,7 @@ async function myPoly(){
                                             
     const results = mySerial.getInfo();
     
-    document.getElementById('myDiv01').innerHTML += await 'Results:<b>: </b><br><pre>' +  JSON.stringify(results, null, 3) + '</pre><br><br>'                                          
+    //document.getElementById('myDiv01').innerHTML += await 'Results:<b>: </b><br><pre>' +  JSON.stringify(results, null, 3) + '</pre><br><br>'                                          
     console.log('get info results', results);
     document.getElementById('usbVendorId').textContent = results.usbVendorId;
     document.getElementById('usbProductId').textContent = results.usbProductId;  
@@ -161,7 +160,7 @@ async function myPoly(){
       console.log('myWritten')
       console.log(myWritten)
                                          
-      document.getElementById('myDiv01').innerHTML = '<br><br><b>myWriter: </b><br><pre>' +  JSON.stringify(myWritten, null, 3) + '</pre><br><br>'  
+      //document.getElementById('myDiv01').innerHTML = '<br><br><b>myWriter: </b><br><pre>' +  JSON.stringify(myWritten, null, 3) + '</pre><br><br>'  
                                             
    
     })    
