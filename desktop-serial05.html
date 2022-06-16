@@ -1,5 +1,5 @@
 
-<h6> Version 0.1.1-12   </h6>
+<h6> Version 0.1.1-14   </h6>
 
 <h1 align=center>Both WebSerial and Web-Serial-Polyfill</h1>
 
@@ -36,7 +36,7 @@ document.getElementById('connectButton').addEventListener('click', () => {
   if (navigator.serial) {
     connectSerial();
   } else {
-    document.getElementById('myDiv01').innerHTML = 'Web Serial API not supported. Switching to Polyfill'
+    document.getElementById('myDiv01').innerHTML = 'Web Serial API not supported. Switching to Polyfill<br>'
     myPoly()
 
   }
@@ -148,8 +148,9 @@ async function myPoly(){
     
     //document.getElementById('myDiv01').innerHTML += await 'Results:<b>: </b><br><pre>' +  JSON.stringify(results, null, 3) + '</pre><br><br>'                                          
     console.log('get info results', results);
-    document.getElementById('usbVendorId').textContent = results.usbVendorId;
-    document.getElementById('usbProductId').textContent = results.usbProductId;  
+    document.getElementById('myDiv01').innerHTML += 'results.usbVendorId: ' + results.usbVendorId + '<br>'
+    document.getElementById('myDiv01').innerHTML += 'results.usbProductId: ' + results.usbProductId + '<br>'
+ 
     
     // start looping the serial read. Is there a better way to do this?
     clearInterval(myLooping)
