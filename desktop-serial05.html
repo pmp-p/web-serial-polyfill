@@ -14,12 +14,13 @@
 <button id="connectButton">Connect via Serial Port</button>
 
 <input type=text id="mySendText" value="a">
-<input type=button value="send" onclick="{ mySendIt(document.getElementById('mySendText').value) }"><br>
+<input type=button value="send" onclick="{ mySendIt(document.getElementById('mySendText').value) }"><br><br>
 
-<input type=button value="send 'a' LED On" onclick="{mySendIt('a')}"><br>
-<input type=button value="send 'b' LED Off" onclick="{mySendIt('b')}"><br>
+<input type=button value="send 'a' LED On" onclick="{mySendIt('a')}"><br><br>
+<input type=button value="send 'b' LED Off" onclick="{mySendIt('b')}"><br><br>
 
-<div id="target">...</div> <br><br><br>
+<div id="target">...</div> <br><br>
+<div id="myDiv01">...</div> <br><br><br>
 
 
 <script>
@@ -35,10 +36,9 @@ document.getElementById('connectButton').addEventListener('click', () => {
   if (navigator.serial) {
     connectSerial();
   } else {
-    alert('Web Serial API not supported. Switching to Polyfill');
+    document.getElementById('target').innerHTML = 'Web Serial API not supported. Switching to Polyfill'
     myPoly()
-    clearInterval(myLooping)
-    myLooping = setInterval(myRead, 1000); 
+
   }
 });
 
@@ -147,7 +147,11 @@ async function myPoly(){
     document.getElementById('myDiv01').innerHTML += await 'Results:<b>: </b><br><pre>' +  JSON.stringify(results, null, 3) + '</pre><br><br>'                                          
     console.log('get info results', results);
     document.getElementById('usbVendorId').textContent = results.usbVendorId;
-    document.getElementById('usbProductId').textContent = results.usbProductId;                                     
+    document.getElementById('usbProductId').textContent = results.usbProductId;  
+    
+    // start looping the serial read. Is there a better way to do this?
+    clearInterval(myLooping)
+    myLooping = setInterval(myRead, 1000); 
   }
         
  async function mySend(myData2){  
