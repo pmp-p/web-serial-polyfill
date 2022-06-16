@@ -1,4 +1,4 @@
-<h6> Version 0.0.1-7  </h6>
+<h6> Version 0.0.1-8  </h6>
 
 
 
@@ -39,7 +39,7 @@ async function init() {
    * @param data - A string of data that will be sent to the Serial port.
    * @returns An empty promise after the message has been written.
    */
-async function write( string): Promise<void> {
+async function write( string) {
     const dataArrayBuffer = this.encoder.encode(data);
     return await this.writer.write(dataArrayBuffer);
   }
@@ -48,7 +48,7 @@ async function write( string): Promise<void> {
    * Gets data from the `reader`, decodes it and returns it inside a promise.
    * @returns A promise containing either the message from the `reader` or an error.
    */
-async function read(): Promise<string> {
+async function read() {
     try {
       const readerData = await this.reader.read();
       return this.decoder.decode(readerData.value);
