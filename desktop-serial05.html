@@ -1,5 +1,5 @@
 
-<h6> Version 0.1.1-14   </h6>
+<h6> Version 0.1.1-15   </h6>
 
 <h1 align=center>Both WebSerial and Web-Serial-Polyfill</h1>
 
@@ -94,7 +94,7 @@ async function mySendIt(myData) {
   
   
   
-  //Global Variables
+  //Global Variables for Polyfill
   var serial = exports.serial;  // is this needed as defined in the npm
  
   let myLooping  // for read setinterval
@@ -120,7 +120,7 @@ async function mySendIt(myData) {
 async function myRead(){  
     reader.read().then(({value}) => {        
         let receivedText = ab2str(value);
-        document.getElementById('target').innerHTML = receivedText + '<br>' + document.getElementById('ReceivedText').innerHTML
+        document.getElementById('target').innerHTML = receivedText + '<br>' + document.getElementById('target').innerHTML // latest on top
       },
       error => {
       console.error('error from read', error)
