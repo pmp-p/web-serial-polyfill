@@ -1,5 +1,5 @@
 
-<h6> Version 0.0.1-3   </h6>
+<h6> Version 0.0.2-4   </h6>
 
 <button id="connectButton">Connect via Serial Port</button>
 
@@ -17,7 +17,7 @@
   
   //Global Variables
  //let writer;  
-  
+  let port
 
 document.getElementById('connectButton').addEventListener('click', () => {
   if (navigator.serial) {
@@ -31,7 +31,7 @@ async function connectSerial() {
   const log = document.getElementById('target');
     
   try {
-    const port = await navigator.serial.requestPort();
+    port = await navigator.serial.requestPort();
     await port.open({ baudRate: 9600 });
     
     const decoder = new TextDecoderStream(); 
