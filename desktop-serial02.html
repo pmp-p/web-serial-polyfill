@@ -1,18 +1,22 @@
 
-<h6> Version 0.0.1-1   </h6>
+<h6> Version 0.0.1-2   </h6>
 
 <button id="connectButton">Connect via Serial Port</button>
+
 <input type=text id="mySendText" value="a" onChange = "{
    mySendIt()
-}"><br>
-<div id="target"></div>
+}">
+
+<input type=button value="send" onclick="{mySendIt()}"><br>
+
+<div id="target">...</div>
 
 
 <script>
   
   
   //Global Variables
-  
+ let writer;  
   
 
 document.getElementById('connectButton').addEventListener('click', () => {
@@ -30,13 +34,16 @@ async function connectSerial() {
     const port = await navigator.serial.requestPort();
     await port.open({ baudRate: 9600 });
     
-    const decoder = new TextDecoderStream();
-    
+    const decoder = new TextDecoderStream(); 
     port.readable.pipeTo(decoder.writable);
 
+    //setup reader stream 
     const inputStream = decoder.readable;
     const reader = inputStream.getReader();
     
+    //setup writer stream
+    writer = port.writable.getWriter();
+     
     while (true) {
       const { value, done } = await reader.read();
       if (value) {
@@ -55,7 +62,12 @@ async function connectSerial() {
 }  
   
 async function mySendIt() {  
-  alert()
+//   const dataArrayBuffer = this.encoder.encode(document.getElementById('mySendText').value);
+  //  return await this.writer.write(dataArrayBuffer);
+   const encoder = new TextEncoder();
+ // const writer = port.writable.getWriter();
+  await writer.write(encoder.encode(document.getElementById('mySendText').value));
+  writer.releaseLock();
 
 } 
 </script>
