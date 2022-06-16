@@ -1,5 +1,5 @@
 
-<h6> Version 0.1.0-6   </h6>
+<h6> Version 0.1.0-7   </h6>
 
 <button id="connectButton">Connect via Serial Port</button>
 
@@ -66,7 +66,7 @@ async function mySendIt(myData) {
   //  return await this.writer.write(dataArrayBuffer);
    const encoder = new TextEncoder();
   const writer = port.writable.getWriter();
-  await writer.write(encoder.encode(myData);
+  await writer.write(encoder.encode(myData));
   writer.releaseLock();
 
 } 
