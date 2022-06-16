@@ -2,11 +2,18 @@
 <h6> Version 0.0.1-1   </h6>
 
 <button id="connectButton">Connect via Serial Port</button>
-
+<input type=text id="mySendText" value="a" onChange = "{
+   mySendIt()
+}"><br>
 <div id="target"></div>
 
 
 <script>
+  
+  
+  //Global Variables
+  
+  
 
 document.getElementById('connectButton').addEventListener('click', () => {
   if (navigator.serial) {
@@ -46,6 +53,11 @@ async function connectSerial() {
     log.innerHTML = error;
   }
 }  
+  
+async function mySendIt() {  
+  alert()
+
+} 
 </script>
 
 
