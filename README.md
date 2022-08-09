@@ -17,3 +17,7 @@ built-in device driver. This project will be used to prototype the design of
 the Serial API.
 
 This is also available as an npm package [here](https://www.npmjs.com/package/web-serial-polyfill) for convenience.
+
+
+
+God explanation here   https://web.dev/serial/
