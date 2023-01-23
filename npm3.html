@@ -1,0 +1,127 @@
+<h6>  Version 0.0.3-43  </h6>
+
+<h1> Testing Polyfill NPM </h1>
+<a href="https://hpssjellis.github.io/web-serial-polyfill/index.html">My Polyfill Index page</a><br><br>
+  
+Presently using this npm you might want to update the version<br>
+<pre>https://cdn.jsdelivr.net/npm/web-serial-polyfill@1.0.13/dist/serial.js</pre> 
+ 
+This one is working on Android not windows or linux. See the next <a href="npm4.html">npm4.html</a><br> 
+
+<script>
+  //Global Variables
+  var exports = {};
+</script>  
+
+
+<script src="https://cdn.jsdelivr.net/npm/web-serial-polyfill@1.0.13/dist/serial.js"> </script> 
+
+<script>
+  //Global Variables
+  var serial = exports.serial;  // is this needed as defined in the npm
+ 
+
+  var mySerial;
+  let receivedText = '';
+  let reader = {};
+  let writer = {};
+  
+   str2ab = function(str) {
+    var buf = new Uint8Array(str.length); // 1 byte for each char
+    for (var i=0, strLen=str.length; i < strLen; i++) {
+      buf[i] = str.charCodeAt(i);
+    }
+    return buf;
+  }
+
+  ab2str = function(buf) {
+    return String.fromCharCode.apply(null, buf);
+  } 
+  
+  
+  
+</script>
+
+
+
+<input type=button value="Connect" onclick="{
+                                            
+  console.log('exports')                    
+  console.log(exports)              
+
+   
+   
+async function myPoly(){  
+  serial.requestPort().then(async (serialPort) => {
+                                            
+      document.getElementById('myDiv01').innerHTML  = await '<b>exports: </b>'+  JSON.stringify(exports, null, '<br>') + '<br><br>'                                                              
+      mySerial = serialPort;   
+      document.getElementById('myDiv01').innerHTML += await '<b>mySerial: </b>'+  JSON.stringify(mySerial, null, '<br>')+ '<br><br>'                                   
+      console.log('mySerial')                    
+      console.log(mySerial)   
+                                            
+      await mySerial.open({baudRate: 115200});
+      reader = mySerial.readable.getReader();
+      writer = mySerial.writable.getWriter();    
+                                            
+   })
+}
+       
+                                     
+// now run it
+myPoly()
+                                   
+                                            
+}"><br><br>
+
+<input type="text" id="inputText"/>
+
+<input type=button value="Send" onclick="{
+
+async function mySend(){  
+    writer.ready.then(() => {
+      let inputArrayBuffer = str2ab(document.getElementById('inputText').value);
+      return writer.write(inputArrayBuffer);
+    })    
+}
+
+mySend()
+                                   
+}"><br>
+
+<input type=button value="Read to ..." onclick="{
+
+async function myRead(){  
+    reader.read().then(({value}) => {
+        receivedText += ab2str(value);
+        document.getElementById('ReceivedText').innerHTML= receivedText
+      },
+      error => {console.error('error from read', error)}
+    );
+}
+
+myRead()
+                                       
+}">
+
+<p id='ReceivedText'>...</p>
+<div id='myDiv01'>...</div>
+
+<p>USB Device Vendor ID: <span id="usbVendorId"/></p>
+<p>USB Device Product ID: <span id="usbProductId"/></p>
+
+<input type=button value="GetDevice Info" onclick="{                                                 
+    const results = mySerial.getInfo();
+    console.log('get info results', results);
+    document.getElementById('usbVendorId').textContent = results.usbVendorId;
+    document.getElementById('usbProductId').textContent = results.usbProductId;                                                   
+}"><br><br>
+
+
+
+
+Main Github <a href="https://github.com/google/web-serial-polyfill">web-serial-polyfill</a><br>
+
+My Fork of the above github <a href="https://github.com/hpssjellis/web-serial-polyfill">my WebSerial Polyfill</a><br>
+
+

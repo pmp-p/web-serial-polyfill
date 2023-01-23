@@ -1,5 +1,14 @@
 # Serial API Polyfill
 
+
+## June 2022
+
+demo
+
+https://hpssjellis.github.io/web-serial-polyfill/index.html
+
+
+
 An implementation of the [Serial API](https://wicg.github.io/serial) on top of
 the [WebUSB API](https://wicg.github.io/webusb) for use with USB-to-serial
 adapters. Use of this library is limited to hardware and platforms where the
@@ -8,3 +17,7 @@ built-in device driver. This project will be used to prototype the design of
 the Serial API.
 
 This is also available as an npm package [here](https://www.npmjs.com/package/web-serial-polyfill) for convenience.
+
+
+
+God explanation here   https://web.dev/serial/

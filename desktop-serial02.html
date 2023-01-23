@@ -1,0 +1,81 @@
+
+<h6> Version 0.0.1-2   </h6>
+
+<button id="connectButton">Connect via Serial Port</button>
+
+<input type=text id="mySendText" value="a" onChange = "{
+   mySendIt()
+}">
+
+<input type=button value="send" onclick="{mySendIt()}"><br>
+
+<div id="target">...</div>
+
+
+<script>
+  
+  
+  //Global Variables
+ let writer;  
+  
+
+document.getElementById('connectButton').addEventListener('click', () => {
+  if (navigator.serial) {
+    connectSerial();
+  } else {
+    alert('Web Serial API not supported.');
+  }
+});
+
+async function connectSerial() {
+  const log = document.getElementById('target');
+    
+  try {
+    const port = await navigator.serial.requestPort();
+    await port.open({ baudRate: 9600 });
+    
+    const decoder = new TextDecoderStream(); 
+    port.readable.pipeTo(decoder.writable);
+
+    //setup reader stream 
+    const inputStream = decoder.readable;
+    const reader = inputStream.getReader();
+    
+    //setup writer stream
+    writer = port.writable.getWriter();
+     
+    while (true) {
+      const { value, done } = await reader.read();
+      if (value) {
+        log.textContent += value + '\n';
+      }
+      if (done) {
+        console.log('[readLoop] DONE', done);
+        reader.releaseLock();
+        break;
+      }
+    }
+  
+  } catch (error) {
+    log.innerHTML = error;
+  }
+}  
+  
+async function mySendIt() {  
+//   const dataArrayBuffer = this.encoder.encode(document.getElementById('mySendText').value);
+  //  return await this.writer.write(dataArrayBuffer);
+   const encoder = new TextEncoder();
+ // const writer = port.writable.getWriter();
+  await writer.write(encoder.encode(document.getElementById('mySendText').value));
+  writer.releaseLock();
+
+} 
+</script>
+
+
+
+
+
+
+
+<p><small>Demo from <a href="https://codelabs.developers.google.com/codelabs/web-serial/" target="_blank" rel="noopener">Google Developers</a> codelabs.</small></p>
